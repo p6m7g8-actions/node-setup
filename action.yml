@@ -11,11 +11,11 @@ runs:
         sudo tar -xJf node-v22.13.0-linux-x64.tar.xz -C /usr/local
         rm -f node-v22.13.0-linux-x64.tar.xz
         echo "/usr/local/node-v22.13.0-linux-x64/bin" >> $GITHUB_PATH
-    - name: Corepack
-      shell: bash
-      run: |
-        sudo corepack enable
-        sudo corepack prepare pnpm@latest --activate
+    # - name: Corepack
+    #   shell: bash
+    #   run: |
+    #     sudo corepack enable
+    #     sudo corepack prepare pnpm@latest --activate
     - name: Restore NPM node_modules
       uses: actions/cache/restore@v4.2.0
       with:

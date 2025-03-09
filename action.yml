@@ -11,6 +11,11 @@ runs:
         sudo tar -xJf node-v22.13.0-linux-x64.tar.xz -C /usr/local
         rm -f node-v22.13.0-linux-x64.tar.xz
         echo "/usr/local/node-v22.13.0-linux-x64/bin" >> $GITHUB_PATH
+    - name: Enable pnpm via Corepack
+      shell: bash
+      run: |
+        corepack enable
+        corepack prepare pnpm@latest --activate
     - name: Check Node
       shell: bash
       run: |
@@ -24,11 +29,6 @@ runs:
         pnpm --version || echo "pnpm not installed"
         corepack --version
         echo $PATH
-    - name: Enable pnpm via Corepack
-      shell: bash
-      run: |
-        corepack enable
-        corepack prepare pnpm@latest --activate
     - name: Install pnpm and dependencies
       shell: bash
       run: pnpm install

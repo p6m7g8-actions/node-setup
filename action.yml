@@ -7,16 +7,18 @@ runs:
     - name: Install Node.js
       shell: bash
       run: |
-        curl -fsSL https://nodejs.org/dist/v22.13.0/node-v22.13.0-linux-x64.tar.xz -o node-v22.13.0-linux-x64.tar.xz
-        sudo tar -xJf node-v22.13.0-linux-x64.tar.xz -C /usr/local
-        sudo chown -R $(whoami) /usr/local/node-v22.13.0-linux-x64
-        rm -f node-v22.13.0-linux-x64.tar.xz
-        echo "/usr/local/node-v22.13.0-linux-x64/bin" >> $GITHUB_PATH
+        curl -fsSL https://nodejs.org/dist/v24.9.0/node-v24.9.0-linux-x64.tar.xz -o node-v24.9.0-linux-x64.tar.xz
+        sudo tar -xJf node-v24.9.0-linux-x64.tar.xz -C /usr/local
+        sudo chown -R $(whoami) /usr/local/node-v24.9.0-linux-x64
+        rm -f node-v24.9.0-linux-x64.tar.xz
+        echo "/usr/local/node-v24.9.0-linux-x64/bin" >> $GITHUB_PATH
+
     - name: Enable pnpm via Corepack
       shell: bash
       run: |
         corepack enable
         corepack prepare pnpm@9.14.2 --activate
+
     - name: Check Node
       shell: bash
       run: |
@@ -30,6 +32,7 @@ runs:
         pnpm --version || echo "pnpm not installed"
         corepack --version
         echo $PATH
+
     - name: Install pnpm and dependencies
       shell: bash
       run: pnpm install

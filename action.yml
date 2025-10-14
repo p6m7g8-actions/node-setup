@@ -31,7 +31,9 @@ runs:
       run: |
         PNPM_VERSION="${{ inputs.pnpm-version }}"
         corepack enable
-        corepack prepare "pnpm@${PNPM_VERSION}" --activate
+        if [ -e package.json ]; then
+          corepack prepare "pnpm@${PNPM_VERSION}" --activate
+        fi
 
     - name: Check Node
       shell: bash
@@ -49,4 +51,7 @@ runs:
 
     - name: Install pnpm and dependencies
       shell: bash
-      run: pnpm install
+      run: |
+        if [ -e package.json ]; then
+          pnpm install
+        fi

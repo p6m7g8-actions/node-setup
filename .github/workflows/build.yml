@@ -2,11 +2,22 @@ name: Build
 
 on:
   pull_request: {}
-  workflow_dispatch: {}
+  merge_group: {}
+  workflow_dispatch:
+    inputs:
+      node-version:
+        description: "Node.js version to install"
+        required: false
+        default: "24.9.0"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: No-op
-        run: echo "This workflow intentionally does nothing and always passes."
+      - name: Checkout repository
+        uses: actions/checkout@v5.0.0
+
+      - name: Setup Node & PNPM using this action
+        uses: ./ # use the local action from this repository
+        with:
+          node-version: ${{ github.event.inputs.node-version || '24.9.0' }}

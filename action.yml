@@ -30,9 +30,20 @@ runs:
       shell: bash
       run: |
         PNPM_VERSION="${{ inputs.pnpm-version }}"
-        corepack enable
-        if [ -e package.json ]; then
-          corepack prepare "pnpm@${PNPM_VERSION}" --activate
+        if [[ "${ACT:-}" == "true" ]]; then
+          # act runs without sudo; install shims into a writable location.
+          COREPACK_BIN_DIR="${RUNNER_TEMP:-$HOME}/corepack-bin"
+          mkdir -p "${COREPACK_BIN_DIR}"
+          corepack enable --install-directory "${COREPACK_BIN_DIR}"
+          echo "${COREPACK_BIN_DIR}" >> "$GITHUB_PATH"
+          if [ -e package.json ]; then
+            corepack prepare "pnpm@${PNPM_VERSION}" --activate
+          fi
+        else
+          sudo corepack enable
+          if [ -e package.json ]; then
+            sudo corepack prepare "pnpm@${PNPM_VERSION}" --activate
+          fi
         fi
 
     - name: Check Node

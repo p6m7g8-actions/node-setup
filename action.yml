@@ -4,9 +4,9 @@ author: "Philip M. Gollucci"
 
 inputs:
   node-version:
-    description: "Node.js version to install (e.g., 24.12.0)"
+    description: "Node.js version to install (e.g., 24.14.0)"
     required: false
-    default: "24.12.0"
+    default: "24.14.0"
 
   pnpm-version:
     description: "pnpm version to activate via Corepack (e.g., 10.28.0)"

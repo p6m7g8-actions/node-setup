@@ -32,7 +32,9 @@
   },
   "cSpell.words": [
     "amannn",
-    "corepack"
+    "corepack",
+    "esac",
+    "SHASUMS"
   ],
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
